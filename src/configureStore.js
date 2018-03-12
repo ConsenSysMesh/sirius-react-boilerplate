@@ -1,8 +1,9 @@
 import {createStore, applyMiddleware, compose} from "redux"
 import rootReducer from "./reducers"
 import thunkMiddleware from 'redux-thunk'
+import { routerMiddleware } from 'react-router-redux'
 
-const configureStore = () => {
+const configureStore = (history) => {
   // Redux DevTools
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -10,7 +11,8 @@ const configureStore = () => {
       rootReducer,
       composeEnhancers(
         applyMiddleware(
-          thunkMiddleware
+          thunkMiddleware,
+          routerMiddleware(history),
         )
       )
     )

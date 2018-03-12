@@ -1,24 +1,19 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import './index.css';
-// import App from './App';
-// import registerServiceWorker from './registerServiceWorker';
-//
-// ReactDOM.render(<App />, document.getElementById('root'));
-// registerServiceWorker();
-
 import React from "react"
 import ReactDOM from "react-dom"
 import {Provider} from "react-redux"
 
 import App from "./App"
 import configureStore from "./configureStore"
+import createHistory from 'history/createBrowserHistory'
 
-const store = configureStore()
+// Create a history of your choosing (we're using a browser history in this case)
+const history = createHistory()
+
+const store = configureStore(history)
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App history={history}/>
   </Provider>,
   document.getElementById("root")
 )
@@ -28,7 +23,7 @@ if (module.hot) {
   module.hot.accept('./App', () => {
     ReactDOM.render(
       <Provider store={store}>
-        <App />
+        <App history={history}/>
       </Provider>,
       document.getElementById('root')
     )
