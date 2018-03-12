@@ -3,6 +3,7 @@ import ReactDOM from "react-dom"
 import {Provider} from "react-redux"
 
 import App from "./App"
+import SetupWrapper from "./wrappers/SetupWrapper"
 import configureStore from "./configureStore"
 import createHistory from 'history/createBrowserHistory'
 
@@ -13,7 +14,9 @@ const store = configureStore(history)
 
 ReactDOM.render(
   <Provider store={store}>
-    <App history={history}/>
+    <SetupWrapper webSocketEndpoint={'wss://echo.websocket.org'}>
+      <App history={history}/>
+    </SetupWrapper>
   </Provider>,
   document.getElementById("root")
 )
@@ -23,7 +26,9 @@ if (module.hot) {
   module.hot.accept('./App', () => {
     ReactDOM.render(
       <Provider store={store}>
-        <App history={history}/>
+        <SetupWrapper webSocketEndpoint={'wss://echo.websocket.org'}>
+          <App history={history}/>
+        </SetupWrapper>
       </Provider>,
       document.getElementById('root')
     )
