@@ -30,7 +30,6 @@ const socketMiddleware = (function(){
   }
 
   return store => next => action => {
-    console.log('socket middleware', action)
     switch(action.type) {
 
       //The user wants us to connect
