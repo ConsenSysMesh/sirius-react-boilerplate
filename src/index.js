@@ -4,6 +4,7 @@ import {Provider} from "react-redux"
 
 import App from "./App"
 import SetupWrapper from "./wrappers/SetupWrapper"
+import AuthWrapper from "./wrappers/AuthWrapper"
 import configureStore from "./configureStore"
 import createHistory from 'history/createBrowserHistory'
 
@@ -14,9 +15,11 @@ const store = configureStore(history)
 
 ReactDOM.render(
   <Provider store={store}>
-    <SetupWrapper webSocketEndpoint={'wss://echo.websocket.org'}>
-      <App history={history}/>
-    </SetupWrapper>
+    <AuthWrapper>
+      <SetupWrapper webSocketEndpoint={'wss://echo.websocket.org'}>
+        <App history={history}/>
+      </SetupWrapper>
+    </AuthWrapper>
   </Provider>,
   document.getElementById("root")
 )
