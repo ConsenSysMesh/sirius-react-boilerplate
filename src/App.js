@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
 import {
   Route,
   Link,
   Redirect,
   withRouter
-} from "react-router-dom";
+} from "react-router-dom"
 import { ConnectedRouter } from 'react-router-redux'
 
 class App extends Component {
@@ -38,25 +38,25 @@ class App extends Component {
           </div>
         </ConnectedRouter>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
 
 
 
 const fakeAuth = {
   isAuthenticated: false,
   authenticate(cb) {
-    this.isAuthenticated = true;
-    setTimeout(cb, 100); // fake async
+    this.isAuthenticated = true
+    setTimeout(cb, 100) // fake async
   },
   signout(cb) {
-    this.isAuthenticated = false;
-    setTimeout(cb, 100);
+    this.isAuthenticated = false
+    setTimeout(cb, 100)
   }
-};
+}
 
 const AuthButton = withRouter(
   ({ history }) =>
@@ -65,7 +65,7 @@ const AuthButton = withRouter(
         Welcome!{" "}
         <button
           onClick={() => {
-            fakeAuth.signout(() => history.push("/"));
+            fakeAuth.signout(() => history.push("/"))
           }}
         >
           Sign out
@@ -74,7 +74,7 @@ const AuthButton = withRouter(
     ) : (
       <p>You are not logged in.</p>
     )
-);
+)
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -92,28 +92,28 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       )
     }
   />
-);
+)
 
-const Public = () => <h3>Public</h3>;
-const Protected = () => <h3>Protected</h3>;
+const Public = () => <h3>Public</h3>
+const Protected = () => <h3>Protected</h3>
 
 class Login extends React.Component {
   state = {
     redirectToReferrer: false
-  };
+  }
 
   login = () => {
     fakeAuth.authenticate(() => {
-      this.setState({ redirectToReferrer: true });
-    });
-  };
+      this.setState({ redirectToReferrer: true })
+    })
+  }
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: "/" } };
-    const { redirectToReferrer } = this.state;
+    const { from } = this.props.location.state || { from: { pathname: "/" } }
+    const { redirectToReferrer } = this.state
 
     if (redirectToReferrer) {
-      return <Redirect to={from} />;
+      return <Redirect to={from} />
     }
 
     return (
@@ -121,6 +121,6 @@ class Login extends React.Component {
         <p>You must log in to view the page at {from.pathname}</p>
         <button onClick={this.login}>Log in</button>
       </div>
-    );
+    )
   }
 }
