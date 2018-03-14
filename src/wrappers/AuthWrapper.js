@@ -1,19 +1,29 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { login } from '../actions/user'
+import { logout } from '../actions/user'
+import { userStatus } from '../reducers/initialState'
+import LoginForm from '../containers/LoginForm'
+import { push } from 'react-router-redux'
 
-// this loads the jwt or anything related to login from localstorage - no UI related to this component
+// this loads the jwt or anything related to login from localStorage - no UI related to this component
 class AuthWrapper extends Component {
-  initWebSockets() {
+  checkUser() {
     const {
       dispatch,
-      user,
+      user: {
+        status
+      },
     } = this.props
-    console.log(user)
+
+    if (!window.localStorage.jwt) {
+      dispatch(logout(push))
+    } else {
+      console.log('TODO:: check if the jwt is valid and update state with result')
+    }
   }
 
   componentDidMount() {
-    this.props.dispatch(login)
+    this.checkUser()
   }
 
   render() {
@@ -23,4 +33,4 @@ class AuthWrapper extends Component {
 
 const mapStateToProps = ({user}) => ({user})
 
-export default connect()(AuthWrapper)
+export default connect(mapStateToProps)(AuthWrapper)

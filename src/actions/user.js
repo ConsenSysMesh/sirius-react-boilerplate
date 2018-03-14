@@ -7,6 +7,10 @@ export const login = {
   type: actions.LOGIN,
 }
 
-export const logout = {
-  type: actions.LOGOUT,
+export const logout = (push) => dispatch => {
+  window.localStorage.jwt = undefined
+  dispatch(push('/login'))
+  dispatch({
+    type: actions.LOGOUT,
+  })
 }

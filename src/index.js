@@ -29,9 +29,11 @@ if (module.hot) {
   module.hot.accept('./App', () => {
     ReactDOM.render(
       <Provider store={store}>
-        <SetupWrapper webSocketEndpoint={'wss://echo.websocket.org'}>
-          <App history={history}/>
-        </SetupWrapper>
+        <AuthWrapper>
+          <SetupWrapper webSocketEndpoint={'wss://echo.websocket.org'}>
+            <App history={history}/>
+          </SetupWrapper>
+        </AuthWrapper>
       </Provider>,
       document.getElementById('root')
     )
