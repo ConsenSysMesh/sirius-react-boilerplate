@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { logout } from '../actions/user'
 import { userStatus } from '../reducers/initialState'
 import LoginForm from '../containers/LoginForm'
-import { push } from 'react-router-redux'
 
-// this loads the jwt or anything related to login from localStorage - no UI related to this component
+// this loads the JWT or anything related to login from localStorage - no UI related to this component
 class AuthWrapper extends Component {
+  // NOTE:: this component could recieve parameters that it checks against and acts accordingly for customisable behaviour
   checkUser() {
     const {
       dispatch,
@@ -15,10 +15,11 @@ class AuthWrapper extends Component {
       },
     } = this.props
 
-    if (!window.localStorage.jwt) {
-      dispatch(logout(push))
+    const localJWT = window.localStorage.getItem('jwt')
+    if (localJWT === null || localJWT === 'null') {
+      dispatch(logout)
     } else {
-      console.log('TODO:: check if the jwt is valid and update state with result')
+      console.log('TODO:: check if the JWT is valid and update state with result')
     }
   }
 
@@ -27,6 +28,7 @@ class AuthWrapper extends Component {
   }
 
   render() {
+    // NOTE:: this component could take in other options to dictate its behaviour, eg. what the behavious should be if the user isn't logged in to see the page
     return React.Children.only(this.props.children)
   }
 }

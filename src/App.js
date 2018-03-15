@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import LoginForm from './containers/LoginForm'
 import logo from './logo.svg'
 import './App.css'
 import {
@@ -6,35 +7,35 @@ import {
   Link,
   Redirect,
   withRouter
-} from "react-router-dom"
+} from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 
 class App extends Component {
   render() {
-     const { history } = this.props
+    const { history } = this.props
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className='App'>
         <ConnectedRouter history={history}>
           <div>
+            <header className='App-header'>
+              <img src={logo} className='App-logo' alt='logo' />
+              <h1 className='App-title'>Welcome to React</h1>
+            </header>
+            <p className='App-intro'>
+              To get started, edit <code>src/App.js</code> and save to reload.
+            </p>
             <AuthButton />
             <ul>
               <li>
-                <Link to="/public">Public Page</Link>
+                <Link to='/public'>Public Page</Link>
               </li>
               <li>
-                <Link to="/protected">Protected Page</Link>
+                <Link to='/protected'>Protected Page</Link>
               </li>
             </ul>
-            <Route path="/public" component={Public} />
-            <Route path="/login" component={Login} />
-            <PrivateRoute path="/protected" component={Protected} />
+            <Route path='/public' component={Public} />
+            <Route path='/login' component={() => <LoginForm onSubmit={console.log}/>} />
+            <PrivateRoute path='/protected' component={Protected} />
           </div>
         </ConnectedRouter>
       </div>
@@ -43,6 +44,7 @@ class App extends Component {
 }
 
 export default App
+
 
 
 
@@ -62,10 +64,10 @@ const AuthButton = withRouter(
   ({ history }) =>
     fakeAuth.isAuthenticated ? (
       <p>
-        Welcome!{" "}
+        Welcome!{' '}
         <button
           onClick={() => {
-            fakeAuth.signout(() => history.push("/"))
+            fakeAuth.signout(() => history.push('/'))
           }}
         >
           Sign out
@@ -85,7 +87,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       ) : (
         <Redirect
           to={{
-            pathname: "/login",
+            pathname: '/login',
             state: { from: props.location }
           }}
         />
@@ -96,31 +98,3 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 const Public = () => <h3>Public</h3>
 const Protected = () => <h3>Protected</h3>
-
-class Login extends React.Component {
-  state = {
-    redirectToReferrer: false
-  }
-
-  login = () => {
-    fakeAuth.authenticate(() => {
-      this.setState({ redirectToReferrer: true })
-    })
-  }
-
-  render() {
-    const { from } = this.props.location.state || { from: { pathname: "/" } }
-    const { redirectToReferrer } = this.state
-
-    if (redirectToReferrer) {
-      return <Redirect to={from} />
-    }
-
-    return (
-      <div>
-        <p>You must log in to view the page at {from.pathname}</p>
-        <button onClick={this.login}>Log in</button>
-      </div>
-    )
-  }
-}

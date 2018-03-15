@@ -1,5 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
+import { login } from '../actions/user'
 
 const LoginForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props
@@ -31,14 +33,14 @@ const LoginForm = props => {
         <button type='submit' disabled={pristine || submitting}>
           Submit
         </button>
-        <button type='button' disabled={pristine || submitting} onClick={reset}>
-          Clear Values
-        </button>
       </div>
     </form>
   )
 }
 
-export default reduxForm({
+const mapDispatchToProps = dispatch => ({
+  onSubmit: ({email, password}) => dispatch(login(email, password))
+})
+export default connect(() => ({}), mapDispatchToProps)(reduxForm({
   form: 'login' // a unique identifier for this form
-})(LoginForm)
+})(LoginForm))
