@@ -1,0 +1,3 @@
+[submodule "mock-boilerplate-backend"]
+	path = mock-boilerplate-backend
+	url = git@github.com:ConsenSys/mock-boilerplate-backend.git
