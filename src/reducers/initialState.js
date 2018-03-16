@@ -6,6 +6,7 @@ export const wsStatuses = {
 }
 
 export const userStatus = {
+  LOGGING_IN: 'LOGGING_IN',
   LOGGED_IN: 'LOGGED_IN',
   LOGGED_OUT: 'LOGGED_OUT',
   UNINITIALISED: 'UNINITIALISED',

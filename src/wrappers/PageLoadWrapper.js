@@ -5,7 +5,7 @@ import { userStatus } from '../reducers/initialState'
 import LoginForm from '../containers/LoginForm'
 
 // this loads the JWT or anything related to login from localStorage - no UI related to this component
-class AuthWrapper extends Component {
+class PageLoadWrapper extends Component {
   // NOTE:: this component could recieve parameters that it checks against and acts accordingly for customisable behaviour
   checkUser() {
     const {
@@ -35,4 +35,4 @@ class AuthWrapper extends Component {
 
 const mapStateToProps = ({user}) => ({user})
 
-export default connect(mapStateToProps)(AuthWrapper)
+export default connect(mapStateToProps)(PageLoadWrapper)
