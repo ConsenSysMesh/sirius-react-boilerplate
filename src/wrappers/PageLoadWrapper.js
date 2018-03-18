@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { logout } from '../actions/user'
-import { userStatus } from '../reducers/initialState'
-import LoginForm from '../containers/LoginForm'
 
 // this loads the JWT or anything related to login from localStorage - no UI related to this component
 class PageLoadWrapper extends Component {
@@ -16,7 +14,7 @@ class PageLoadWrapper extends Component {
       },
     } = this.props
 
-    if (jwt === '') {
+    if (jwt === undefined || jwt === '') {
       dispatch(logout)
     } else {
       console.log('TODO:: check if the JWT is valid and update state with result')

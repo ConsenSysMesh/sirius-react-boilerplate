@@ -1,19 +1,16 @@
 import React, { Component } from 'react'
 import LoginForm from './containers/LoginForm'
+import TopMenu from './containers/TopMenu'
 import {
   Route,
-  Link,
-  Redirect,
-  withRouter,
-  NavLink
 } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import {
   userIsAuthenticatedRedir,
   userIsNotAuthenticatedRedir,
-  userIsAuthenticated,
-  userIsNotAuthenticated,
 } from './wrappers/auth'
+import { Container } from 'semantic-ui-react'
+import 'semantic-ui-css/semantic.min.css'
 
 const Home = () => <h3>Home</h3>
 const Protected = () => <h3>Protected</h3>
@@ -28,18 +25,14 @@ class App extends Component {
       <div className='App'>
         <ConnectedRouter history={history}>
           <div>
-            <div>
-              <nav>
-                <NavLink exact to="/">Home</NavLink>
-                <NavLink exact to="/protected">Protected</NavLink>
-                <NavLink to="/login">Login</NavLink>
-              </nav>
+            <TopMenu/>
+            <Container text style={{ marginTop: '7em' }}>
               <div>
                 <Route exact path="/" component={Home}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/protected" component={ProtectedWrapped}/>
               </div>
-            </div>
+            </Container>
           </div>
         </ConnectedRouter>
       </div>

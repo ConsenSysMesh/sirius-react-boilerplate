@@ -28,7 +28,7 @@ export const userIsAuthenticatedRedir = connectedReduxRedirect({
 
 const userIsNotAuthenticatedDefaults = {
   // Want to redirect the user when they are done loading and authenticated
-  authenticatedSelector: state => state.user.status === userStatus.LOGGED_OUT || state.user.status === userStatus.UNINITIALISED,
+  authenticatedSelector: state => state.user.status !== userStatus.LOGGED_IN,
   wrapperDisplayName: 'UserIsNotAuthenticated'
 }
 
