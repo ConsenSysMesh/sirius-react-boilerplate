@@ -11,12 +11,12 @@ class PageLoadWrapper extends Component {
     const {
       dispatch,
       user: {
-        status
+        status,
+        jwt,
       },
     } = this.props
 
-    const localJWT = window.localStorage.getItem('jwt')
-    if (localJWT === null || localJWT === 'null') {
+    if (jwt === '') {
       dispatch(logout)
     } else {
       console.log('TODO:: check if the JWT is valid and update state with result')

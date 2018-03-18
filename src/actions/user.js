@@ -12,7 +12,7 @@ export const login = (email, password) => async dispatch => {
   })
   var data = new FormData();
   data.append( "email", JSON.stringify( {email, password} ) );
-  const res = await fetch('/users/createUser',{
+  const res = await fetch('/users/login',{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -20,16 +20,15 @@ export const login = (email, password) => async dispatch => {
     body: JSON.stringify({email, password}),
   })
   const userInfo = await res.json()
-  window.localStorage.setItem('jwt', userInfo.token)
+
   dispatch(push('/'))
   dispatch({
     type: actions.LOGIN,
+    jwt: userInfo.token,
   })
 }
 
 export const logout = dispatch => {
-  window.localStorage.setItem('jwt', null)
-
   dispatch(push('/login'))
 
   dispatch({

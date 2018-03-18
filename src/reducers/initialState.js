@@ -18,4 +18,5 @@ export const initStateWs = {
 
 export const initStateUser = {
   status: userStatus.UNINITIALISED,
+  jwt: '',
 }
