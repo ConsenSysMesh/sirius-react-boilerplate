@@ -19,6 +19,7 @@ class TopMenu extends Component {
     const LoginButton = userIsNotAuthenticated(() => <Button inverted={true} onClick={this.props.login}>Log in</Button>)
     const LogoutButton = userIsAuthenticated(() => <Button inverted={true} onClick={this.props.logout} style={{ marginLeft: '0.5em' }}>Log out</Button>)
     const SignUpButton = userIsNotAuthenticated(() => <Button as='a' inverted={true} primary={false} style={{ marginLeft: '0.5em' }}>Sign Up</Button>)
+    const { pathname } = this.props
 
     return (
       <Menu fixed='top' inverted>
@@ -26,8 +27,8 @@ class TopMenu extends Component {
           <Menu.Item as='a' header>
             Project Name
           </Menu.Item>
-          <Menu.Item><NavLink exact to="/">Home</NavLink></Menu.Item>
-          <Menu.Item><NavLink exact to="/protected">Protected</NavLink></Menu.Item>
+          <Menu.Item active={'/' === pathname}><NavLink exact to='/'>Home</NavLink></Menu.Item>
+          <Menu.Item active={'/protected' === pathname}><NavLink exact to='/protected'>Protected</NavLink></Menu.Item>
           <Menu.Item position='right'>
             <LoginButton/>
             <LogoutButton/>
@@ -42,4 +43,7 @@ const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout),
   login: () => dispatch(push('/login')),
 })
-export default connect(()=>({}), mapDispatchToProps)(TopMenu)
+const mapStateToProps = ({routing: {location: {pathname}}}) => ({
+  pathname
+})
+export default connect(mapStateToProps, mapDispatchToProps)(TopMenu)
