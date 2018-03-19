@@ -17,8 +17,8 @@
     "redux-auth-wrapper": "^2.0.2",
     "redux-form": "^7.3.0",
     "redux-thunk": "^2.2.0",
-    "semantic-ui-css": "^2.3.0",
-    "semantic-ui-react": "^0.78.3"
+    "semantic-ui-react": "^0.78.3",
+    "semantic-ui-sass": "^2.2.11"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
