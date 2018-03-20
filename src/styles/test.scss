@@ -1,0 +1,8 @@
+$icons-font-path: './icons' !default;
+$flags-image-path: './images' !default;
+
+@import 'globals/all';
+@import 'elements/all';
+@import 'collections/all';
+@import 'views/all';
+@import 'modules/all';

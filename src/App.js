@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import TopMenu from './containers/TopMenu'
 import PageBody from './components/PageBody'
 import { ConnectedRouter } from 'react-router-redux'
-import 'semantic-ui-css/semantic.min.css'
+import './styles/test.css'
 
 class App extends Component {
   render() {
