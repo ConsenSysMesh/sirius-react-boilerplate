@@ -10,8 +10,6 @@ import {
   userIsNotAuthenticated,
 } from '../wrappers/auth'
 import { Container, Menu, Button } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css'
-
 
 // {userIsNotAuthenticated(<Button inverted={true} onClick={() => this.props.dispatch(push('/login'))}>Log in</Button>)}
 class TopMenu extends Component {
